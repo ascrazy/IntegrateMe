@@ -7,16 +7,16 @@ module MailChimpAdapter
     def all_lists
       gibbon.lists.retrieve
     rescue Gibbon::MailChimpError => err
-      raise MailChimpAdapter::MailChimpError, err.message
+      raise MailChimpAdapter::MailChimpError, "#{err.title}: #{err.detail}"
     end
 
     def find_list(list_id)
       response = gibbon.lists(list_id).retrieve
     rescue Gibbon::MailChimpError => err
-      raise MailChimpAdapter::MailChimpError, err.message
+      raise MailChimpAdapter::MailChimpError, "#{err.title}: #{err.detail}"
     end
 
-    def add_member_to_list(list_id, email:, name: nil)
+    def add_member_to_list(list_id, email:)
       gibbon.lists(list_id).members(Digest::MD5.hexdigest(email)).upsert(
         body: {
           email_address: email,
@@ -24,7 +24,7 @@ module MailChimpAdapter
         }
       )
     rescue Gibbon::MailChimpError => err
-      raise MailChimpAdapter::MailChimpError, err.message
+      raise MailChimpAdapter::MailChimpError, "#{err.title}: #{err.detail}"
     end
 
     private

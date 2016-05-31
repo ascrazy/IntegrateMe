@@ -3,7 +3,7 @@ require 'rails_helper'
 class TestMailChimpAdapter
   def all_list; end
   def find_list(_list_id); end
-  def add_member_to_list(_list_id, email:, name:); end
+  def add_member_to_list(_list_id, email:,); end
 end
 
 describe EnterCompetition do
@@ -39,7 +39,7 @@ describe EnterCompetition do
       allow(test_mail_chimp_adapter).to receive(:add_member_to_list)
       subject.call(competition_id: competition.id, email: 'luke@example.com')
       expect(test_mail_chimp_adapter).to have_received(:add_member_to_list)
-        .with(competition.mail_chimp_list_id, email: 'luke@example.com', name: nil)
+        .with(competition.mail_chimp_list_id, email: 'luke@example.com')
     end
 
     it 'switches entry sync_status to "synced"' do

@@ -5,6 +5,11 @@ class EntriesController < ApplicationController
     render json: result, status: result[:success] ? 200 : 400
   end
 
+  def resync
+    result = ResyncEntry.new(mail_chimp_adapter: gibon_adapter).call(Entry.find(params[:id]))
+    render json: result, status: result[:success] ? 200 : 400
+  end
+
   private
 
   # Never trust parameters from the scary internet, only allow the white list through.
