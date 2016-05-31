@@ -4,6 +4,7 @@ class CompetitionsController < ApplicationController
   end
 
   def show
+    # TODO: add authentication
     @competition = Competition.find(params[:id])
   end
 end

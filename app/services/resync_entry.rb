@@ -9,6 +9,7 @@ class ResyncEntry
     return { success: true }
   rescue MailChimpAdapter::MailChimpError => err
     Rails.logger.error("Failed to resync entry to MailChimp. #{err.message}")
+    entry.update(sync_status: Entry::FAILED)
     return { success: false, error_message: err.message }
   end
 

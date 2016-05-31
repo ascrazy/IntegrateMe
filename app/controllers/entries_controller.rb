@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
   end
 
   def resync
+    # TODO: add authentication
     result = ResyncEntry.new(mail_chimp_adapter: gibon_adapter).call(Entry.find(params[:id]))
     render json: result, status: result[:success] ? 200 : 400
   end

@@ -1,13 +1,7 @@
 require 'rails_helper'
 
-class TestMailChimpAdapter
-  def all_list; end
-  def find_list(_list_id); end
-  def add_member_to_list(_list_id, email:,); end
-end
-
 describe EnterCompetition do
-  let(:test_mail_chimp_adapter) { TestMailChimpAdapter.new }
+  let(:test_mail_chimp_adapter) { double(:test_mail_chimp_adapter, add_member_to_list: nil) }
   subject { EnterCompetition.new(mail_chimp_adapter: test_mail_chimp_adapter) }
 
   context 'when user enters competition which doesn\'t exists' do
