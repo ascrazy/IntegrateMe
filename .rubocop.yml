@@ -4,6 +4,9 @@ Style/Documentation:
 Metrics/LineLength:
   Max: 120
 
+Style/GuardClause:
+  Enabled: false
+
 Style/RaiseArgs:
   Enabled: false
 

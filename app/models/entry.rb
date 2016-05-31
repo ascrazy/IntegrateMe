@@ -8,7 +8,7 @@ class Entry < ActiveRecord::Base
   validates_presence_of :competition, inverse_of: :entries
   validates_presence_of :email
   validates_format_of :email, :with => EMAIL_REGEX, allow_blank: true, allow_nil: true
-  validates_presence_of :name, if: :requires_name
+  validates_presence_of :name, if: :requires_name?
   validates_uniqueness_of :email, scope: :competition, message: "has already entered this competition"
 
   private
@@ -16,7 +16,7 @@ class Entry < ActiveRecord::Base
       self.email = email.downcase.strip if email.present?
     end
 
-    def requires_name
-      competition.requires_entry_name?
+    def requires_name?
+      competition && competition.requires_entry_name?
     end
 end
