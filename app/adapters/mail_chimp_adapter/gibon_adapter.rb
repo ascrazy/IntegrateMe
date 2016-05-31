@@ -17,11 +17,10 @@ module MailChimpAdapter
     end
 
     def add_member_to_list(list_id, email:, name: nil)
-      gibbon.lists(list_id).members(Digest::MD5.hexdigest(member.email)).upsert(
+      gibbon.lists(list_id).members(Digest::MD5.hexdigest(email)).upsert(
         body: {
-          email_address: member.email,
-          status: 'subscribed',
-          merge_fields: { NAME: 'First Name', LNAME: 'Last Name' }
+          email_address: email,
+          status: 'subscribed'
         }
       )
     rescue Gibbon::MailChimpError => err

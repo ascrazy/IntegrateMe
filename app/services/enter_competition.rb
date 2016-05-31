@@ -26,8 +26,8 @@ class EnterCompetition
     )
     entry.update(sync_status: 'synced')
   rescue MailChimpAdapter::MailChimpError => err
-    Rails.logger.error("Failed to sync new entry to MailChimp. #{err.message}")
     entry.update(sync_status: 'failed')
+    Rails.logger.error("Failed to sync new entry to MailChimp. #{err.message}")
     SystemMailer.notify_failed_synchronization(
       entry.competition.runner_email,
       err.message,

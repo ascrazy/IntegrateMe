@@ -11,13 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160531093324) do
+ActiveRecord::Schema.define(version: 20160531112419) do
 
   create_table "competitions", force: :cascade do |t|
     t.string   "name"
     t.boolean  "requires_entry_name", default: true
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.string   "mail_chimp_list_id"
+    t.string   "runner_email"
   end
 
   create_table "entries", force: :cascade do |t|
