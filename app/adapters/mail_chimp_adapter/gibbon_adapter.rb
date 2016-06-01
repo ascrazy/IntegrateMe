@@ -1,5 +1,5 @@
 module MailChimpAdapter
-  class GibonAdapter
+  class GibbonAdapter
     include ActiveSupport::Rescuable
 
     rescue_from Gibbon::MailChimpError do |err|
@@ -27,7 +27,7 @@ module MailChimpAdapter
     end
 
     def add_member_to_list(list_id, email:)
-      gibbon.lists(list_id).members(Digest::MD5.hexdigest(email)).upsert(
+      gibbon.lists(list_id).members.create(
         body: {
           email_address: email,
           status: 'subscribed'

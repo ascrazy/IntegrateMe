@@ -7,9 +7,8 @@ describe ResyncEntry do
 
   context 'when synchronization to MailChimp is successful' do
     it 'switches entry sync_status to "synced"' do
-      allow(test_mail_chimp_adapter).to receive(:add_member_to_list)
       result = subject.call(entry)
-      expect(result[:success]).to be_truthy
+      expect(result[:success]).to be(true)
       expect(entry.reload.sync_status).to eq('synced')
     end
   end
@@ -18,7 +17,7 @@ describe ResyncEntry do
     it 'switches entry sync_status to "failed"' do
       allow(test_mail_chimp_adapter).to receive(:add_member_to_list).and_raise(MailChimpAdapter::MailChimpError)
       result = subject.call(entry)
-      expect(result[:success]).to be_falsey
+      expect(result[:success]).to be(false)
       expect(entry.reload.sync_status).to eq('failed')
     end
   end

@@ -7,7 +7,7 @@ describe EnterCompetition do
   context 'when user enters competition which doesn\'t exists' do
     it 'fails with an error on competition_id' do
       result = subject.call(competition_id: 0)
-      expect(result[:success]).to be_falsey
+      expect(result[:success]).to be(false)
       expect(result[:errors].messages[:competition]).not_to be_empty
     end
   end
@@ -30,7 +30,6 @@ describe EnterCompetition do
     end
 
     it 'synchronizes entry to MailChimp' do
-      allow(test_mail_chimp_adapter).to receive(:add_member_to_list)
       subject.call(competition_id: competition.id, email: 'luke@example.com')
       expect(test_mail_chimp_adapter).to have_received(:add_member_to_list)
         .with(competition.mail_chimp_list_id, email: 'luke@example.com')
@@ -45,7 +44,7 @@ describe EnterCompetition do
       it 'switches entry sync_status to "failed"' do
         allow(test_mail_chimp_adapter).to receive(:add_member_to_list).and_raise(MailChimpAdapter::MailChimpError)
         result = subject.call(competition_id: competition.id, email: 'luke@example.com')
-        expect(result[:success]).to be_truthy
+        expect(result[:success]).to be(true)
         expect(Entry.find_by(email: 'luke@example.com').sync_status).to eq('failed')
       end
 
