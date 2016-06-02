@@ -2,7 +2,7 @@ module Api
   class CompetitionsController < BaseController
     def create
       result = CreateCompetition.new(
-        mail_chimp_adapter_klass: MailChimpAdapter::GibbonAdapter
+        mail_chimp_adapter: MailChimpAdapter::GibbonAdapter
       ).call(competition_params)
       render json: result, status: result[:success] ? 200 : 400
     end
