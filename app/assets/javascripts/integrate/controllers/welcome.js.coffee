@@ -9,7 +9,7 @@ angular.module('integrate').controller('WelcomeController', ($scope, $http) ->
     self.errors = null
     $http.post("/api/competitions", { competition: self.new_competition }).
       success((data, status, headers, config) ->
-        self.competitions.push(data);
+        self.competitions.unshift(data);
         self.new_competition = {}
       ).
       error((data, status, headers, config) ->

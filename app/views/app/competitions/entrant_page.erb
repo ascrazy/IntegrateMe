@@ -1,4 +1,4 @@
-<div ng-controller="EntrantController as ctrl" ng-init="ctrl.init(<%= entrant_init(@entry) %>)">
+<div ng-controller="EntrantController as ctrl" ng-init="ctrl.init(<%= entrant_init(@competition) %>)">
   <h1>{{ctrl.competition.name}}</h1>
 
   <div ng-if="!ctrl.entry.completed">

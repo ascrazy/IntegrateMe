@@ -4,7 +4,11 @@ module Api
       result = CreateCompetition.new(
         mail_chimp_adapter: MailChimpAdapter::GibbonAdapter
       ).call(competition_params)
-      render json: result, status: result[:success] ? 200 : 400
+      if result[:success]
+        render json: result[:competition], serializer: CompetitionSerializer
+      else
+        render json: result, status: 400
+      end
     end
 
     def competition_params

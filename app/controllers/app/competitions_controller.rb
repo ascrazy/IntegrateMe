@@ -1,7 +1,7 @@
 module App
   class CompetitionsController < BaseController
     def entrant_page
-      @entry = Entry.new(competition: Competition.find(params[:competition_id]))
+      @competition = Competition.find(params[:competition_id])
     end
 
     def show

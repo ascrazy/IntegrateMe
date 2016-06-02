@@ -1,7 +1,7 @@
 <div
   ng-controller="WelcomeController as ctrl"
   ng-init="ctrl.init(<%= welcome_init(@competitions) %>)"
-  class="welcome-page"
+  class="page welcome-page"
 >
   <form class="competition-form" ng-submit="ctrl.create_competition()">
     <div class="heading">Add new competition</div>
@@ -46,7 +46,7 @@
     </div>
     <span ng-if="ctrl.competitions.length == 0" class="empty">No competitions available ;(</span>
     <div ng-repeat="competition in ctrl.competitions" class="competition-item">
-      <a ng-href="{{competition.entrant_page_path}}" class="name">{{competition.name}}</span>
+      <a ng-href="{{competition.enter_path}}" class="name">{{competition.name}}</span>
       <a ng-href="{{competition.stats_path}}" class="stats">(stats)</span>
     </div>
   </div>

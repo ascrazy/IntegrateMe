@@ -1,36 +1,28 @@
 module CompetitionsHelper
-  def competition_entrant_page(competition)
-    "/#{competition.id}/#{competition.name.downcase.gsub(/[^a-z0-9 _\-]/i, '').gsub(/[ _-]/, '-')}"
-  end
-
-  def entrant_init(entry)
-    {
-        competition: { id: entry.competition.id, name: entry.competition.name, requires_entry_name: entry.competition.requires_entry_name? }
-    }.to_json
+  def entrant_init(competition)
+    ActiveModelSerializers::SerializableResource.new(
+      competition,
+      adapter: :json,
+      root: :competition,
+      serializer: CompetitionPublicSerializer
+    ).to_json
   end
 
   def competition_init(competition)
-    {
-      competition: {
-        id: competition.id,
-        name: competition.name,
-        requires_entry_name: competition.requires_entry_name?
-      },
-      unsynced_entries: competition.unsynced_entries.map do |entry|
-        { id: entry.id, email: entry.email, name: entry.name, sync_status: entry.sync_status }
-      end
-    }.to_json
+    ActiveModelSerializers::SerializableResource.new(
+      competition,
+      adapter: :json,
+      root: :competition,
+      serializer: CompetitionStatsSerializer
+    ).to_json
   end
 
   def welcome_init(competitions)
-    competitions_data = competitions.map do |competition|
-      {
-        id: competition.id,
-        name: competition.name,
-        entrant_page_path: competition_entrant_page(competition),
-        stats_path: competition_path(competition)
-      }
-    end
-    { competitions: competitions_data }.to_json
+    ActiveModelSerializers::SerializableResource.new(
+      competitions,
+      adapter: :json,
+      root: :competitions,
+      each_serializer: CompetitionSerializer
+    ).to_json
   end
 end
