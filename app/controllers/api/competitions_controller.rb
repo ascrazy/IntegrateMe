@@ -1,8 +1,7 @@
 module Api
   class CompetitionsController < BaseController
     def create
-      CreateCompetition.new.call(competition_params)
-      result = CreateCompetition.new.call(entry_params)
+      result = CreateCompetition.new.call(competition_params)
       render json: result, status: result[:success] ? 200 : 400
     end
 

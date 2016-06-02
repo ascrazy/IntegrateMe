@@ -21,4 +21,16 @@ module CompetitionsHelper
       end
     }.to_json
   end
+
+  def welcome_init(competitions)
+    competitions_data = competitions.map do |competition|
+      {
+        id: competition.id,
+        name: competition.name,
+        entrant_page_path: competition_entrant_page(competition),
+        stats_path: competition_path(competition)
+      }
+    end
+    { competitions: competitions_data }.to_json
+  end
 end

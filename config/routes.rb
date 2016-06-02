@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :competitions, only: :show, module: :app
 
   namespace :api do
+    resources :competitions, only: :create
     resources :entries, only: :create do
       post :resync, on: :member
     end
