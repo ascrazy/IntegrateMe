@@ -3,8 +3,10 @@
   ng-init="ctrl.init(<%= welcome_init(@competitions) %>)"
   class="page welcome-page"
 >
+  <!-- TODO: Use separated controller for competition form -->
   <form class="competition-form" ng-submit="ctrl.create_competition()">
     <div class="heading">Add new competition</div>
+    <!-- TODO: Improve errors displaying -->
     <div id="error_explanation" ng-if="ctrl.errors">
       Sorry, ther was a problem saving your entry:
       <ul>
@@ -43,6 +45,7 @@
     </div>
     <div class="form-field">
       <label for="new_competition_mail_chimp_api_key">MailChimp List</label>
+      <!-- TODO: Factor out mail-chimp-list-selector to a separated component -->
       <div class="mail-chimp-list-selector">
         <div class="api-key-input">
           <input

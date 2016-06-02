@@ -5,7 +5,6 @@ class CompetitionSerializer < ApplicationSerializer
   attributes :id,
              :name,
              :requires_entry_name,
-             :runner_email,
              :stats_path,
              :enter_path
 

@@ -1,6 +1,7 @@
 module Api
   class CompetitionsController < BaseController
     def create
+      # TODO: add authentication
       result = CreateCompetition.new(
         mail_chimp_adapter: MailChimpAdapter::GibbonAdapter
       ).call(competition_params)

@@ -4,7 +4,7 @@ module CompetitionsHelper
       competition,
       adapter: :json,
       root: :competition,
-      serializer: CompetitionPublicSerializer
+      serializer: CompetitionSerializer
     ).to_json
   end
 
