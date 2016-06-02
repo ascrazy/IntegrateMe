@@ -15,50 +15,63 @@
       </ul>
     </div>
     <div class="form-field">
-      <span>Name</span>
-      <input type="text" name="name" ng-model="ctrl.new_competition.name" />
+      <label for="new_competition_name">Name</label>
+      <input
+        id="new_competition_name"
+        type="text"
+        name="name"
+        ng-model="ctrl.new_competition.name"
+       />
     </div>
     <div class="form-field">
-      <span>Requires entry name?</span>
+      <label for="new_competition_requires_entry_name">Requires entry name?</label>
       <input
+        id="new_competition_requires_entry_name"
         type="checkbox"
         name="requires_entry_name"
         ng-model="ctrl.new_competition.requires_entry_name"
       />
     </div>
     <div class="form-field">
-      <span>Runner email</span>
-      <input type="email" name="runner_email" ng-model="ctrl.new_competition.runner_email" />
+      <label for="new_competition_runner_email">Runner email</label>
+      <input
+        id="new_competition_runner_email"
+        type="email"
+        name="runner_email"
+        ng-model="ctrl.new_competition.runner_email"
+       />
     </div>
     <div class="form-field">
-      <span>MailChimp List</span>
+      <label for="new_competition_mail_chimp_api_key">MailChimp List</label>
       <div class="mail-chimp-list-selector">
         <div class="api-key-input">
           <input
+            id="new_competition_mail_chimp_api_key"
             type="text"
             name="mail_chimp_api_key"
             ng-model="ctrl.new_competition.mail_chimp_api_key"
             placeholder="Enter MailChimp api key"
           />
-          <button type="button" ng-click="ctrl.fetchLists()">></button>
+          <button type="button" name="fetch_lists" ng-click="ctrl.fetchLists()">></button>
         </div>
         <select
-          ng-if="ctrl.mail_chimp_lists.length > 0"
+          id="new_competition_mail_chimp_list_id"
+          ng-if="ctrl.mail_chimp_lists"
+          ng-disabled="ctrl.mail_chimp_lists.length === 0"
           ng-model="ctrl.new_competition.mail_chimp_list_id"
         >
-          <option value='' disabled>Select a list</option>
+          <option value='' disabled>
+            {{ctrl.mail_chimp_lists.length === 0 ? "No lists available" : "Select a list"}}
+          </option>
           <option ng-repeat="list in ctrl.mail_chimp_lists" value={{list.id}}>
             {{list.name}}
           </option>
-        </select>
-        <select disabled ng-if="ctrl.mail_chimp_lists.length === 0">
-          <option selected>No lists available</option>
         </select>
       </div>
     </div>
     <div class="form-field">
       <span></span>
-      <input type="submit" value="Create!" />
+      <button type="submit" name="submit">Create!</button>
     </div>
   </form>
   <div class="competitions-list">

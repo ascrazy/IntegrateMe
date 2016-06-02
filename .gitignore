@@ -19,4 +19,4 @@
 
 /.vagrant
 
-/config/mail_chimp.yml
+/spec/fixtures/mail_chimp.yml
