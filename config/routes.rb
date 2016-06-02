@@ -13,6 +13,9 @@ Rails.application.routes.draw do
     resources :entries, only: :create do
       post :resync, on: :member
     end
+    scope :mail_chimp do
+      get 'lists' => 'mail_chimp_proxy#lists'
+    end
   end
 
   # Example of regular route:
