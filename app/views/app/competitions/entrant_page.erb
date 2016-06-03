@@ -1,4 +1,4 @@
-<div ng-controller="EntrantController as ctrl" ng-init="ctrl.init(<%= entrant_init(@entry) %>)">
+<div ng-controller="EntrantController as ctrl" ng-init="ctrl.init(<%= entrant_init(@competition) %>)">
   <h1>{{ctrl.competition.name}}</h1>
 
   <div ng-if="!ctrl.entry.completed">
@@ -26,9 +26,11 @@
       </p>
 
       <input type="submit" ng-click="ctrl.submit()" value="Enter!">
+      <%= link_to "Cancel", root_path %>
     </form>
   </div>
   <div ng-if="ctrl.entry.completed">
     <p>Thank you for entering our competition!</p>
+    <%= link_to "See more competitions", root_path %>
   </div>
 </div>

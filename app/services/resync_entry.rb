@@ -4,7 +4,8 @@ class ResyncEntry
   end
 
   def call(entry)
-    mail_chimp_adapter.add_member_to_list(entry.competition.mail_chimp_list_id, email: entry.email)
+    mail_chimp_adapter.new(api_key: entry.competition.mail_chimp_api_key)
+                      .add_member_to_list(entry.competition.mail_chimp_list_id, email: entry.email)
     entry.update(sync_status: Entry::SYNCED)
     return { success: true }
   rescue MailChimpAdapter::MailChimpError => err

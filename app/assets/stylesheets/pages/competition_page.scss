@@ -5,9 +5,7 @@
   width: 100%;
 
   > .name {
-    font-size: 2rem;
-    line-height: 2.2rem;
-    font-weight: bold;
+    @include h1();
     padding: 0.5rem 0;
   }
 
@@ -22,8 +20,7 @@
   align-items: stretch;
 
   > .heading {
-    font-size: 1.5rem;
-    line-height: 1.7rem;
+    @include h2();
     padding: 0.5rem 0;
     border-bottom: 1px solid gray;
   }
@@ -37,8 +34,7 @@
   }
 
   > .empty {
+    @include h2();
     margin: auto;
-    font-size: 1.5rem;
-    line-height: 1.7rem;
   }
 }

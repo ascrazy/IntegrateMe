@@ -6,7 +6,7 @@ angular.module('integrate').controller('EntrantController', ($scope, $http) ->
     self.entry = { competition_id: data.competition.id }
 
   @submit = ->
-    $http.post("/entries", self.entry).
+    $http.post("/api/entries", self.entry).
       success((data, status, headers, config) ->
         self.entry.completed = true
       ).

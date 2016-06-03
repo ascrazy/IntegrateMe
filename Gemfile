@@ -17,7 +17,7 @@ gem 'angularjs-rails'
 gem 'angular_rails_csrf'
 
 gem 'gibbon', '~> 2.2.4'
-
+gem 'active_model_serializers', '~> 0.10.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -38,6 +38,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.3.3'
   gem 'pry'
   gem 'factory_girl_rails', '~> 4.0'
+  gem 'capybara', '~> 2.7.1'
+  gem 'poltergeist'
+  gem 'database_cleaner'
 end
 
 group :development do

@@ -1,8 +1,7 @@
 require 'rails_helper'
 
 describe ResyncEntry do
-  let(:test_mail_chimp_adapter) { double(:test_mail_chimp_adapter, add_member_to_list: nil) }
-  subject { ResyncEntry.new(mail_chimp_adapter: test_mail_chimp_adapter) }
+  subject { ResyncEntry.new(mail_chimp_adapter: MailChimpAdapter::TestAdapter) }
   let(:entry) { create(:entry) }
 
   context 'when synchronization to MailChimp is successful' do
@@ -15,7 +14,8 @@ describe ResyncEntry do
 
   context 'when synchronization to MailChimp fails' do
     it 'switches entry sync_status to "failed"' do
-      allow(test_mail_chimp_adapter).to receive(:add_member_to_list).and_raise(MailChimpAdapter::MailChimpError)
+      allow_any_instance_of(MailChimpAdapter::TestAdapter).to receive(:add_member_to_list)
+        .and_raise(MailChimpAdapter::MailChimpError)
       result = subject.call(entry)
       expect(result[:success]).to be(false)
       expect(entry.reload.sync_status).to eq('failed')
